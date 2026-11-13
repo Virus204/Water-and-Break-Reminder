@@ -28,23 +28,30 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             combo = new ComboBox();
             panel1 = new Panel();
+            WaterStartBtn = new Button();
+            WaterPauseBtn = new Button();
+            WaterResumeBtn = new Button();
+            WaterResetBtn = new Button();
             lblWaterCountdown = new Label();
-            button3 = new Button();
             checkBox1 = new CheckBox();
-            WRstop_interval = new Button();
-            button1 = new Button();
             linkLabel1 = new LinkLabel();
             panel2 = new Panel();
+            BreakStartBtn = new Button();
+            BreakResetBtn = new Button();
             lblBreakCountdown = new Label();
             cmbBreakInterval = new ComboBox();
             checkBox2 = new CheckBox();
-            button6 = new Button();
-            button5 = new Button();
-            button4 = new Button();
+            BreakPauseBtn = new Button();
+            BreakResumeBtn = new Button();
             panel3 = new Panel();
             label1 = new Label();
+            timer1 = new System.Windows.Forms.Timer(components);
+            timer2 = new System.Windows.Forms.Timer(components);
+            timer3 = new System.Windows.Forms.Timer(components);
+            timer4 = new System.Windows.Forms.Timer(components);
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
@@ -54,7 +61,7 @@
             // 
             combo.DropDownStyle = ComboBoxStyle.DropDownList;
             combo.FormattingEnabled = true;
-            combo.Items.AddRange(new object[] { "15 min", "30 min", "45 min", "60 min" });
+            combo.Items.AddRange(new object[] { "1 min", "15 min", "30 min", "45 min", "60 min" });
             combo.Location = new Point(17, 99);
             combo.Name = "combo";
             combo.Size = new Size(121, 23);
@@ -65,16 +72,57 @@
             // 
             panel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             panel1.BackColor = Color.White;
+            panel1.Controls.Add(WaterStartBtn);
+            panel1.Controls.Add(WaterPauseBtn);
+            panel1.Controls.Add(WaterResetBtn);
             panel1.Controls.Add(lblWaterCountdown);
-            panel1.Controls.Add(button3);
             panel1.Controls.Add(checkBox1);
-            panel1.Controls.Add(WRstop_interval);
-            panel1.Controls.Add(button1);
             panel1.Controls.Add(combo);
+            panel1.Controls.Add(WaterResumeBtn);
             panel1.Location = new Point(13, 205);
             panel1.Name = "panel1";
             panel1.Size = new Size(308, 230);
             panel1.TabIndex = 6;
+            // 
+            // WaterStartBtn
+            // 
+            WaterStartBtn.Location = new Point(59, 148);
+            WaterStartBtn.Name = "WaterStartBtn";
+            WaterStartBtn.Size = new Size(75, 23);
+            WaterStartBtn.TabIndex = 8;
+            WaterStartBtn.Text = "Start";
+            WaterStartBtn.UseVisualStyleBackColor = true;
+            WaterStartBtn.Click += WaterStartBtn_Click;
+            // 
+            // WaterPauseBtn
+            // 
+            WaterPauseBtn.Location = new Point(59, 148);
+            WaterPauseBtn.Name = "WaterPauseBtn";
+            WaterPauseBtn.Size = new Size(75, 23);
+            WaterPauseBtn.TabIndex = 9;
+            WaterPauseBtn.Text = "Pause";
+            WaterPauseBtn.UseVisualStyleBackColor = true;
+            WaterPauseBtn.Click += WaterPauseBtn_Click;
+            // 
+            // WaterResumeBtn
+            // 
+            WaterResumeBtn.Location = new Point(59, 148);
+            WaterResumeBtn.Name = "WaterResumeBtn";
+            WaterResumeBtn.Size = new Size(75, 23);
+            WaterResumeBtn.TabIndex = 10;
+            WaterResumeBtn.Text = "Resume";
+            WaterResumeBtn.UseVisualStyleBackColor = true;
+            WaterResumeBtn.Click += WaterResumeBtn_Click;
+            // 
+            // WaterResetBtn
+            // 
+            WaterResetBtn.Location = new Point(161, 148);
+            WaterResetBtn.Name = "WaterResetBtn";
+            WaterResetBtn.Size = new Size(75, 23);
+            WaterResetBtn.TabIndex = 11;
+            WaterResetBtn.Text = "Reset";
+            WaterResetBtn.UseVisualStyleBackColor = true;
+            WaterResetBtn.Click += WaterResetBtn_Click;
             // 
             // lblWaterCountdown
             // 
@@ -85,15 +133,6 @@
             lblWaterCountdown.TabIndex = 3;
             lblWaterCountdown.Text = "Water Reminder";
             // 
-            // button3
-            // 
-            button3.Location = new Point(88, 177);
-            button3.Name = "button3";
-            button3.Size = new Size(75, 23);
-            button3.TabIndex = 2;
-            button3.Text = "Reset";
-            button3.UseVisualStyleBackColor = true;
-            // 
             // checkBox1
             // 
             checkBox1.AutoSize = true;
@@ -103,26 +142,6 @@
             checkBox1.TabIndex = 2;
             checkBox1.Text = "State";
             checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // WRstop_interval
-            // 
-            WRstop_interval.Location = new Point(161, 148);
-            WRstop_interval.Name = "WRstop_interval";
-            WRstop_interval.Size = new Size(75, 23);
-            WRstop_interval.TabIndex = 1;
-            WRstop_interval.Text = "Stop";
-            WRstop_interval.UseVisualStyleBackColor = true;
-            WRstop_interval.Click += WRstop_interval_Click;
-            // 
-            // button1
-            // 
-            button1.Location = new Point(17, 148);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 0;
-            button1.Text = "Start";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
             // 
             // linkLabel1
             // 
@@ -136,16 +155,37 @@
             // 
             panel2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             panel2.BackColor = Color.White;
+            panel2.Controls.Add(BreakStartBtn);
+            panel2.Controls.Add(BreakResetBtn);
             panel2.Controls.Add(lblBreakCountdown);
             panel2.Controls.Add(cmbBreakInterval);
             panel2.Controls.Add(checkBox2);
-            panel2.Controls.Add(button6);
-            panel2.Controls.Add(button5);
-            panel2.Controls.Add(button4);
+            panel2.Controls.Add(BreakPauseBtn);
+            panel2.Controls.Add(BreakResumeBtn);
             panel2.Location = new Point(599, 205);
             panel2.Name = "panel2";
             panel2.Size = new Size(290, 230);
             panel2.TabIndex = 6;
+            // 
+            // BreakStartBtn
+            // 
+            BreakStartBtn.Location = new Point(61, 148);
+            BreakStartBtn.Name = "BreakStartBtn";
+            BreakStartBtn.Size = new Size(75, 23);
+            BreakStartBtn.TabIndex = 0;
+            BreakStartBtn.Text = "Start";
+            BreakStartBtn.UseVisualStyleBackColor = true;
+            BreakStartBtn.Click += BreakStartBtn_Click;
+            // 
+            // BreakResetBtn
+            // 
+            BreakResetBtn.Location = new Point(173, 148);
+            BreakResetBtn.Name = "BreakResetBtn";
+            BreakResetBtn.Size = new Size(75, 23);
+            BreakResetBtn.TabIndex = 6;
+            BreakResetBtn.Text = "Reset";
+            BreakResetBtn.UseVisualStyleBackColor = true;
+            BreakResetBtn.Click += BreakResetBtn_Click_1;
             // 
             // lblBreakCountdown
             // 
@@ -159,7 +199,7 @@
             // cmbBreakInterval
             // 
             cmbBreakInterval.FormattingEnabled = true;
-            cmbBreakInterval.Items.AddRange(new object[] { "15 min", "30 min", "45 min ", "60 min" });
+            cmbBreakInterval.Items.AddRange(new object[] { "1 min", "15 min", "30 min", "45 min ", "60 min" });
             cmbBreakInterval.Location = new Point(15, 95);
             cmbBreakInterval.Name = "cmbBreakInterval";
             cmbBreakInterval.Size = new Size(121, 23);
@@ -176,33 +216,25 @@
             checkBox2.Text = "State";
             checkBox2.UseVisualStyleBackColor = true;
             // 
-            // button6
+            // BreakPauseBtn
             // 
-            button6.Location = new Point(110, 177);
-            button6.Name = "button6";
-            button6.Size = new Size(75, 23);
-            button6.TabIndex = 2;
-            button6.Text = "Reset";
-            button6.UseVisualStyleBackColor = true;
+            BreakPauseBtn.Location = new Point(61, 148);
+            BreakPauseBtn.Name = "BreakPauseBtn";
+            BreakPauseBtn.Size = new Size(75, 23);
+            BreakPauseBtn.TabIndex = 1;
+            BreakPauseBtn.Text = "Pause";
+            BreakPauseBtn.UseVisualStyleBackColor = true;
+            BreakPauseBtn.Click += BreakPauseBtn_Click;
             // 
-            // button5
+            // BreakResumeBtn
             // 
-            button5.Location = new Point(180, 148);
-            button5.Name = "button5";
-            button5.Size = new Size(75, 23);
-            button5.TabIndex = 1;
-            button5.Text = "Stop";
-            button5.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            button4.Location = new Point(36, 148);
-            button4.Name = "button4";
-            button4.Size = new Size(75, 23);
-            button4.TabIndex = 0;
-            button4.Text = "Start";
-            button4.UseVisualStyleBackColor = true;
-            button4.Click += button1_Click;
+            BreakResumeBtn.Location = new Point(61, 148);
+            BreakResumeBtn.Name = "BreakResumeBtn";
+            BreakResumeBtn.Size = new Size(75, 23);
+            BreakResumeBtn.TabIndex = 8;
+            BreakResumeBtn.Text = "Resume";
+            BreakResumeBtn.UseVisualStyleBackColor = true;
+            BreakResumeBtn.Click += BreakResumeBtn_Click;
             // 
             // panel3
             // 
@@ -226,12 +258,20 @@
             label1.TabIndex = 7;
             label1.Text = "Good evening! Don't forget to hydrate.";
             // 
+            // timer1
+            // 
+            timer1.Tick += timer1_Tick;
+            // 
+            // timer4
+            // 
+            timer4.Tick += timer4_Tick_1;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(1184, 761);
+            ClientSize = new Size(1110, 638);
             Controls.Add(panel3);
             Controls.Add(linkLabel1);
             Name = "Form1";
@@ -256,18 +296,27 @@
         private CheckBox checkBox1;
         private Button WRstop_interval;
         private Button button1;
-        private Button button3;
         private LinkLabel linkLabel1;
         private Panel panel2;
         private ComboBox cmbBreakInterval;
         private ComboBox comboBox2;
         private CheckBox checkBox2;
         private Button button6;
-        private Button button5;
-        private Button button4;
+        private Button BreakPauseBtn;
+        private Button BreakStartBtn;
         private Label lblWaterCountdown;
         private Label lblBreakCountdown;
         private Panel panel3;
         private Label label1;
+        private System.Windows.Forms.Timer timer1;
+        private Button BreakResetBtn;
+        private Button BreakResumeBtn;
+        private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.Timer timer3;
+        private System.Windows.Forms.Timer timer4;
+        private Button WaterStartBtn;
+        private Button WaterPauseBtn;
+        private Button WaterResumeBtn;
+        private Button WaterResetBtn;
     }
 }
