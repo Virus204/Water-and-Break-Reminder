@@ -2,15 +2,48 @@ namespace WaterBreakReminder
 {
     public partial class Form1 : Form
     {
+        private NotificationManager notificationManager;
         int countdown = 0;
         int reminder = 0;
         public Form1()
         {
             InitializeComponent();
+            notificationManager = new NotificationManager();
+
+            notificationManager.TrayIconDoubleClick += (sender, e) =>
+            {
+                this.Show();
+                this.WindowState = FormWindowState.Normal;
+            };
+
+            AppSettings savedSettings = AppSettings.Load();
+            chkSound.Checked = savedSettings.SoundEnabled;
+
+            chkSound.CheckedChanged += chkSound_CheckedChanged;
+
+            this.Resize += Form1_Resize;
+            this.FormClosing += Form1_FormClosing;
             timer1.Interval = 1000;
             timer4.Interval = 1000;
             UpdateBreakButtons();
             UpdateReminderButtons();
+        }
+        private void chkSound_CheckedChanged(object sender, EventArgs e)
+        {
+            notificationManager.SetSoundEnabled(chkSound.Checked);
+        }
+
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                this.Hide();
+            }
+        }
+
+        private void Form1_FormClosing(object? sender, FormClosingEventArgs e)
+        {
+            notificationManager.Dispose();
         }
 
         private void UpdateWaterCountdown()
@@ -237,12 +270,8 @@ namespace WaterBreakReminder
 
             lblBreakCountdown.Text = "Time is up!";
 
-            MessageBox.Show(
-                "Hey dude, it's your break time!",
-                "Break Reminder",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information
-            );
+            notificationManager.ShowBreakNotification();
+
             UpdateBreakButtons();
         }
         private void FinishReminder()
@@ -251,12 +280,8 @@ namespace WaterBreakReminder
 
             lblWaterCountdown.Text = "Time is up!";
 
-            MessageBox.Show(
-                "Hey dude, it's your water time!",
-                "Water Reminder",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information
-            );
+            notificationManager.ShowWaterNotification();
+
             UpdateReminderButtons();
         }
     }

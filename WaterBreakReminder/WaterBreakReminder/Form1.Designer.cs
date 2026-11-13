@@ -33,10 +33,10 @@
             panel1 = new Panel();
             WaterStartBtn = new Button();
             WaterPauseBtn = new Button();
-            WaterResumeBtn = new Button();
             WaterResetBtn = new Button();
             lblWaterCountdown = new Label();
             checkBox1 = new CheckBox();
+            WaterResumeBtn = new Button();
             linkLabel1 = new LinkLabel();
             panel2 = new Panel();
             BreakStartBtn = new Button();
@@ -49,9 +49,8 @@
             panel3 = new Panel();
             label1 = new Label();
             timer1 = new System.Windows.Forms.Timer(components);
-            timer2 = new System.Windows.Forms.Timer(components);
-            timer3 = new System.Windows.Forms.Timer(components);
             timer4 = new System.Windows.Forms.Timer(components);
+            chkSound = new CheckBox();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
@@ -104,16 +103,6 @@
             WaterPauseBtn.UseVisualStyleBackColor = true;
             WaterPauseBtn.Click += WaterPauseBtn_Click;
             // 
-            // WaterResumeBtn
-            // 
-            WaterResumeBtn.Location = new Point(59, 148);
-            WaterResumeBtn.Name = "WaterResumeBtn";
-            WaterResumeBtn.Size = new Size(75, 23);
-            WaterResumeBtn.TabIndex = 10;
-            WaterResumeBtn.Text = "Resume";
-            WaterResumeBtn.UseVisualStyleBackColor = true;
-            WaterResumeBtn.Click += WaterResumeBtn_Click;
-            // 
             // WaterResetBtn
             // 
             WaterResetBtn.Location = new Point(161, 148);
@@ -142,6 +131,16 @@
             checkBox1.TabIndex = 2;
             checkBox1.Text = "State";
             checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // WaterResumeBtn
+            // 
+            WaterResumeBtn.Location = new Point(59, 148);
+            WaterResumeBtn.Name = "WaterResumeBtn";
+            WaterResumeBtn.Size = new Size(75, 23);
+            WaterResumeBtn.TabIndex = 10;
+            WaterResumeBtn.Text = "Resume";
+            WaterResumeBtn.UseVisualStyleBackColor = true;
+            WaterResumeBtn.Click += WaterResumeBtn_Click;
             // 
             // linkLabel1
             // 
@@ -238,6 +237,7 @@
             // 
             // panel3
             // 
+            panel3.Controls.Add(chkSound);
             panel3.Controls.Add(label1);
             panel3.Controls.Add(panel2);
             panel3.Controls.Add(panel1);
@@ -265,6 +265,18 @@
             // timer4
             // 
             timer4.Tick += timer4_Tick_1;
+            // 
+            // chkSound
+            // 
+            chkSound.AutoSize = true;
+            chkSound.Checked = true;
+            chkSound.CheckState = CheckState.Checked;
+            chkSound.Location = new Point(398, 119);
+            chkSound.Name = "chkSound";
+            chkSound.Size = new Size(161, 19);
+            chkSound.TabIndex = 8;
+            chkSound.Text = "Enable notification sound";
+            chkSound.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -311,12 +323,11 @@
         private System.Windows.Forms.Timer timer1;
         private Button BreakResetBtn;
         private Button BreakResumeBtn;
-        private System.Windows.Forms.Timer timer2;
-        private System.Windows.Forms.Timer timer3;
         private System.Windows.Forms.Timer timer4;
         private Button WaterStartBtn;
         private Button WaterPauseBtn;
         private Button WaterResumeBtn;
         private Button WaterResetBtn;
+        private CheckBox chkSound;
     }
 }
