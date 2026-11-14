@@ -281,8 +281,7 @@ namespace WaterBreakReminder
             lblWaterCountdown.Text = "Time is up!";
 
             notificationManager.ShowWaterNotification();
-
-            UpdateReminderButtons();
+            StartReminder();
         }
     }
 }
